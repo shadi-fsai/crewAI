@@ -8,7 +8,6 @@ from copy import copy
 from hashlib import md5
 from typing import Any, Dict, List, Optional, Tuple, Type, Union
 
-
 from langchain_openai import ChatOpenAI
 from opentelemetry.trace import Span
 from pydantic import UUID4, BaseModel, Field, field_validator, model_validator
@@ -214,8 +213,8 @@ class Task(BaseModel):
         tools: Optional[List[Any]],
     ) -> TaskOutput:
         """Run the core execution logic of the task."""
-        self.agent = agent
         agent = agent or self.agent
+        self.agent = agent
         if not agent:
             raise Exception(
                 f"The task '{self.description}' has no agent assigned, therefore it can't be executed directly and should be executed in a Crew using a specific process that support that, like hierarchical."
@@ -329,9 +328,14 @@ class Task(BaseModel):
 
     def _create_converter(self, *args, **kwargs) -> Converter:
         """Create a converter instance."""
-        converter = self.agent.get_output_converter(*args, **kwargs)
-        if self.converter_cls:
+        if self.agent and not self.converter_cls:
+            converter = self.agent.get_output_converter(*args, **kwargs)
+        elif self.converter_cls:
             converter = self.converter_cls(*args, **kwargs)
+
+        if not converter:
+            raise Exception("No output converter found or set.")
+
         return converter
 
     def _export_output(

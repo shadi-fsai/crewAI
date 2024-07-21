@@ -128,6 +128,7 @@ nav:
     - Collaboration: 'core-concepts/Collaboration.md'
     - Training: 'core-concepts/Training-Crew.md'
     - Memory: 'core-concepts/Memory.md'
+    - Planning: 'core-concepts/Planning.md'
     - Using LangChain Tools: 'core-concepts/Using-LangChain-Tools.md'
     - Using LlamaIndex Tools: 'core-concepts/Using-LlamaIndex-Tools.md'
   - How to Guides:
@@ -146,6 +147,7 @@ nav:
     - Kickoff a Crew Asynchronously: 'how-to/Kickoff-async.md'
     - Kickoff a Crew for a List: 'how-to/Kickoff-for-each.md'
     - Replay from a specific task from a kickoff: 'how-to/Replay-tasks-from-latest-Crew-Kickoff.md'
+    - Conditional Tasks: 'how-to/Conditional-Tasks.md'
     - Agent Monitoring with AgentOps: 'how-to/AgentOps-Observability.md'
     - Agent Monitoring with LangTrace: 'how-to/Langtrace-Observability.md'
   - Tools Docs:
